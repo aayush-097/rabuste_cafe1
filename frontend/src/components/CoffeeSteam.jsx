@@ -9,11 +9,13 @@ export default function CoffeeSteam() {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
     /* ================= SCENE ================= */
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.z = 6;
+    camera.position.z = isMobile ? 7.2 : 6; // ✅ visibility only
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -32,24 +34,19 @@ export default function CoffeeSteam() {
     };
 
     resize();
+    window.addEventListener("resize", resize);
 
     /* ================= MOUSE ================= */
     const mouse = new THREE.Vector2();
     const targetMouse = new THREE.Vector2();
-    const prevMouse = new THREE.Vector2();
-    const mouseVelocity = new THREE.Vector2();
 
     const onMouseMove = (e) => {
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = -(e.clientY / window.innerHeight) * 2 + 1;
-
-      mouseVelocity.set(x - prevMouse.x, y - prevMouse.y);
-      prevMouse.set(x, y);
-      targetMouse.set(x, y);
+      if (isMobile) return;
+      targetMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      targetMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
 
     window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("resize", resize);
 
     /* ================= STEAM TEXTURE ================= */
     const createSteamTexture = () => {
@@ -58,8 +55,8 @@ export default function CoffeeSteam() {
       const ctx = c.getContext("2d");
 
       const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-      g.addColorStop(0, "rgba(255,240,220,0.2)");
-      g.addColorStop(0.4, "rgba(255,240,220,0.1)");
+      g.addColorStop(0, "rgba(255,240,220,0.22)");
+      g.addColorStop(0.4, "rgba(255,240,220,0.12)");
       g.addColorStop(1, "rgba(255,240,220,0)");
 
       ctx.fillStyle = g;
@@ -73,8 +70,8 @@ export default function CoffeeSteam() {
     const steamTexture = createSteamTexture();
 
     /* ================= PARTICLES ================= */
-    const COUNT = 140;
-    const CUP_POS = new THREE.Vector3(2, -0.5, -0.2);
+    const COUNT = isMobile ? 180 : 140;
+    const CUP_POS = new THREE.Vector3(2, -0.5, -0.2); // ✅ NEVER CHANGE
     const RIM_RADIUS = 0.22;
 
     const geometry = new THREE.PlaneGeometry(0.75, 0.75);
@@ -105,8 +102,14 @@ export default function CoffeeSteam() {
     const clock = new THREE.Clock();
 
     const animate = () => {
-      mouse.lerp(targetMouse, 0.08);
       const t = clock.getElapsedTime();
+
+      if (!isMobile) {
+        mouse.lerp(targetMouse, 0.08);
+      } else {
+        mouse.x = Math.sin(t * 0.25) * 0.08;
+        mouse.y = Math.cos(t * 0.3) * 0.06;
+      }
 
       particles.forEach((p) => {
         p.life += 0.003;
@@ -126,8 +129,6 @@ export default function CoffeeSteam() {
         const h = p.mesh.position.y - CUP_POS.y;
 
         const cone = h * p.spread;
-        const cursorForce = h * 0.6;
-
         const zigzagX = Math.sin(h * 10 + t * 2 + p.curl) * 0.05;
         const zigzagZ = Math.cos(h * 10 + t * 2 + p.curl) * 0.05;
 
@@ -135,20 +136,20 @@ export default function CoffeeSteam() {
           CUP_POS.x +
           Math.cos(p.angle) * cone +
           zigzagX +
-          mouse.x * cursorForce +
-          mouseVelocity.x * h;
+          mouse.x * h * 0.6;
 
         p.mesh.position.z =
           CUP_POS.z +
           Math.sin(p.angle) * cone +
           zigzagZ +
-          mouse.y * cursorForce +
-          mouseVelocity.y * h * 0.8;
+          mouse.y * h * 0.6;
 
         p.mesh.scale.x += 0.002;
         p.mesh.scale.y += 0.0035;
 
-        p.mesh.material.opacity = Math.sin(p.life * Math.PI) * 0.16;
+        p.mesh.material.opacity =
+          Math.sin(p.life * Math.PI) * (isMobile ? 0.22 : 0.16);
+
         p.mesh.quaternion.copy(camera.quaternion);
       });
 
@@ -158,7 +159,6 @@ export default function CoffeeSteam() {
 
     animate();
 
-    /* ================= CLEANUP ================= */
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("mousemove", onMouseMove);
