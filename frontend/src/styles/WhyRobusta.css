@@ -1,0 +1,447 @@
+#why {
+  padding: 100px 18px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* HEADINGS */
+
+.section-kicker {
+  color: #c6a16e;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 70px;
+}
+
+/* LEVELS */
+
+.levels {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
+
+.level {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.level.right {
+  grid-template-columns: 1fr 360px;
+}
+
+.level.right .level-video {
+  grid-column: 2;
+}
+
+.level.right .level-text {
+  grid-column: 1;
+}
+
+/* VIDEO CARD */
+
+.level-video {
+  width: 360px;
+  height: 220px;
+  background: #000;
+  border-radius: 18px;
+  overflow: hidden;
+  transform-origin: center;
+  will-change: transform, top, left;
+}
+
+.level-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TEXT */
+
+.level-text h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.muted {
+  opacity: 0.75;
+  max-width: 420px;
+  line-height: 1.7;
+}
+
+/* GIFT CARD */
+
+.gift-card {
+  margin-top: 10rem;
+  padding: 2.5rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.gift-card video {
+  max-width: 420px;
+  width: 100%;
+  border-radius: 14px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .level,
+  .level.right {
+    grid-template-columns: 1fr;
+  }
+
+  .level-video {
+    width: 100%;
+    height: 220px;
+  }
+
+  .level.right .level-video,
+  .level.right .level-text {
+    grid-column: auto;
+  }
+}
+#why {
+  padding: 100px 18px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Add a Wrapper to prevent layout collapse during zoom */
+.level-video-wrapper {
+  width: 360px;
+  height: 220px;
+}
+
+.levels {
+  display: flex;
+  flex-direction: column;
+  gap: 15rem; /* Increased gap for better autoscroll feel */
+}
+
+.level {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 3rem;
+  align-items: center;
+  min-height: 40vh; /* Ensures camera has space to scroll */
+}
+
+.level.right {
+  grid-template-columns: 1fr 360px;
+}
+
+.level-video {
+  width: 360px;
+  height: 220px;
+  background: #000;
+  border-radius: 18px;
+  overflow: hidden;
+  transform-origin: center;
+  will-change: transform;
+  position: relative;
+  z-index: 1;
+}
+
+.level-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text & Headings same as your original ... */
+.game-intro-viewport {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /* This is our camera lens */
+  position: relative;
+  background: #0b0b0b;
+}
+
+.moving-track {
+  width: 100%;
+  will-change: transform;
+}
+
+#why {
+  padding: 100px 18px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.levels {
+  display: flex;
+  flex-direction: column;
+  gap: 30vh; /* Space out the levels so the camera has to travel */
+  padding-bottom: 50vh;
+}
+
+.level {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.level.right { grid-template-columns: 1fr 360px; }
+
+.level-video {
+  width: 360px;
+  height: 220px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+}
+/* KEEPING YOUR WORKING VIEWPORT STYLES */
+.game-intro-viewport {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #0b0b0b;
+  position: relative;
+}
+
+.moving-track {
+  width: 100%;
+  padding: 15vh 0;
+  will-change: transform;
+}
+
+#why {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.levels {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem; /* Gap between level and the dots */
+}
+
+/* ZIGZAG LOGIC */
+.level {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.level.right {
+  grid-template-columns: 1fr 360px;
+}
+
+.level-video {
+  width: 360px;
+  height: 220px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+  z-index: 1;
+}
+
+/* THE CURVED DOTS LOGIC */
+.path-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 60px 0;
+  width: 100%;
+  align-items: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: block;
+}
+
+/* Curve from Left Video to Right Video */
+.curve-right .dot:nth-child(1) { transform: translateX(-160px); }
+.curve-right .dot:nth-child(2) { transform: translateX(-100px); }
+.curve-right .dot:nth-child(3) { transform: translateX(0px); }
+.curve-right .dot:nth-child(4) { transform: translateX(100px); }
+.curve-right .dot:nth-child(5) { transform: translateX(160px); }
+
+/* Curve from Right Video back to Left Video */
+.curve-left .dot:nth-child(1) { transform: translateX(160px); }
+.curve-left .dot:nth-child(2) { transform: translateX(100px); }
+.curve-left .dot:nth-child(3) { transform: translateX(0px); }
+.curve-left .dot:nth-child(4) { transform: translateX(-100px); }
+.curve-left .dot:nth-child(5) { transform: translateX(-160px); }
+
+/* Final Section */
+.gift-card {
+  margin-top: 100px;
+  text-align: center;
+  padding-bottom: 200px;
+}
+/* While intro is running */
+.game-intro-viewport {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /* This is the lock */
+  background: #0b0b0b;
+  position: relative;
+}
+
+/* AFTER INTRO FINISHES */
+.game-intro-viewport.intro-complete {
+  height: auto; 
+  overflow: visible; /* Release the lock */
+}
+
+.game-intro-viewport.intro-complete .moving-track {
+  transform: none !important; /* Reset GSAP movement so natural scroll takes over */
+  padding-bottom: 100px;
+}
+
+/* Rest of your zigzag and curve CSS remains exactly the same... */
+.moving-track {
+  width: 100%;
+  padding: 10vh 0;
+  will-change: transform;
+}
+/* ... etc ... *//* Update this part of your CSS */
+.game-intro-viewport.intro-complete {
+  height: auto;
+  overflow: visible;
+  position: relative;
+}
+
+.game-intro-viewport.intro-complete .moving-track {
+  transform: none !important; /* This is key! It kills the GSAP 'y' offset */
+  padding: 100px 0;
+}
+/* BACKGROUND VIDEO STYLING */
+.video-bg-container {
+  position: fixed; /* Keeps it in place during intro movement */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Behind everything */
+  overflow: hidden;
+}
+
+.main-bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4; /* Lower opacity so it's not distracting */
+  filter: grayscale(40%) blur(2px); /* Gives it a cinematic feel */
+}
+
+.bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 20%, #0b0b0b 100%);
+  /* Creates a vignette effect to focus on the center content */
+}
+
+/* Ensure the track is transparent so we can see the video */
+.moving-track {
+  background: transparent;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Rest of your zigzag and curve CSS stays the same... */
+.game-intro-viewport {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #0b0b0b;
+  position: relative;
+}
+
+/* IMPORTANT: Release lock */
+.game-intro-viewport.intro-complete {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.game-intro-viewport.intro-complete .moving-track {
+  transform: none !important; /* Removes the GSAP Y offset */
+  padding: 100px 0;
+}
+
+.moving-track {
+  width: 100%;
+  will-change: transform;
+  position: relative;
+  z-index: 5;
+}
+
+/* BG VIDEO */
+.video-bg-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none; /* Allows clicks to pass through to the videos */
+}
+
+.main-bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  filter: blur(1px) brightness(0.6);
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 20%, #0b0b0b 90%);
+}
+
+/* DOTS */
+.path-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px 0;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Curve transforms stay same as previous */
+.curve-right .dot:nth-child(1) { transform: translateX(-160px); }
+.curve-right .dot:nth-child(2) { transform: translateX(-80px); }
+.curve-right .dot:nth-child(3) { transform: translateX(0px); }
+.curve-right .dot:nth-child(4) { transform: translateX(80px); }
+.curve-right .dot:nth-child(5) { transform: translateX(160px); }
+
+.curve-left .dot:nth-child(1) { transform: translateX(160px); }
+.curve-left .dot:nth-child(2) { transform: translateX(80px); }
+.curve-left .dot:nth-child(3) { transform: translateX(0px); }
+.curve-left .dot:nth-child(4) { transform: translateX(-80px); }
+.curve-left .dot:nth-child(5) { transform: translateX(-160px); }

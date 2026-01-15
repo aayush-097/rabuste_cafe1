@@ -1,0 +1,29 @@
+{
+  "name": "rabuste_cafe",
+  "version": "1.0.0",
+  "description": "Immersive, mobile-first experience for a Robusta-only café. Scroll-led storytelling, backend-powered data, explainable rule-based AI cues.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vishal079-code/rabuste_cafe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Vishal079-code/rabuste_cafe/issues"
+  },
+  "homepage": "https://github.com/Vishal079-code/rabuste_cafe#readme",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "body-parser": "^2.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "openai": "^6.15.0"
+  }
+}

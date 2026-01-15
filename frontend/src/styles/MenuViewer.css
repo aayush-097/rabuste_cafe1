@@ -1,0 +1,347 @@
+/* ================= ROOT ================= */
+
+.menu-viewer-root {
+  height: 100vh;
+  width: 100vw;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 2500px;
+}
+
+/* ================= NAVIGATION ================= */
+
+.menu-controls {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  z-index: 100;
+}
+
+.title-stack {
+  text-align: center;
+  min-width: 300px;
+}
+
+.page-indicator {
+  color: #ffffff;
+  font-size: 1.5rem;
+  letter-spacing: 0.25em;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.page-indicator:hover {
+  color: var(--accent-soft);
+  letter-spacing: 0.3em;
+}
+
+.indicator-line {
+  height: 2px;
+  background: #d86b32;
+  width: 50px;
+  margin: 8px auto;
+}
+
+.nav-arrow {
+  background: transparent;
+  color: #d86b32;
+  border: 1px solid rgba(216, 107, 50, 0.5);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+  background: #d86b32;
+  color: #ffffff;
+}
+
+/* ================= BOOK CONTAINER ================= */
+
+.book-container {
+  position: relative;
+  width: 550px;
+  height: 80vh;
+  max-height: 850px;
+  transform-style: preserve-3d;
+}
+
+.page-leaf,
+.page-underlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.page-leaf { z-index: 2; }
+
+.leaf-front {
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+/* ================= PAPER ================= */
+
+.paper-sheet {
+  width: 100%;
+  height: 100%;
+  background: #fdfaf3;
+  padding: 20px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+  border-radius: 4px;
+  background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+}
+
+.paper-border {
+  border: 1px solid rgba(216, 107, 50, 0.4);
+  height: 100%;
+  padding: 10px;
+}
+
+/* ================= SCROLL ================= */
+
+.paper-scroll-area {
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px 30px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(216,107,50,0.7) transparent;
+}
+
+.paper-scroll-area::-webkit-scrollbar {
+  width: 4px;
+}
+
+.paper-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(216,107,50,0.7);
+  border-radius: 4px;
+}
+
+/* ================= HEADER ================= */
+
+.paper-header {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px double rgba(0,0,0,0.15);
+  padding-bottom: 10px;
+}
+
+.estd {
+  font-size: 0.625rem;
+  letter-spacing: 0.25em;
+  color: #6b4b3a;
+  opacity: 0.85;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.estd:hover {
+  opacity: 1;
+  letter-spacing: 0.3em;
+}
+
+.ornament {
+  color: #d86b32;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+/* ================= SECTIONS ================= */
+
+.menu-section-group {
+  margin-bottom: 40px;
+}
+
+.section-bifurcation {
+  font-family: var(--font-heading);
+  color: #b5531f;
+  font-size: 1rem;
+  letter-spacing: 0.1875em;
+  text-align: center;
+  margin: 30px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.section-bifurcation:hover {
+  color: #d86b32;
+  letter-spacing: 0.22em;
+}
+
+.section-bifurcation::before,
+.section-bifurcation::after {
+  content: "";
+  height: 1px;
+  width: 40px;
+  background: rgba(216, 107, 50, 0.4);
+}
+
+.section-label {
+  color: #5a3a2e;
+  font-weight: 700;
+  letter-spacing: 0.0625em;
+  margin-bottom: 6px;
+  font-family: var(--font-heading);
+  transition: color 0.3s ease;
+}
+
+.section-label:hover {
+  color: #b5531f;
+}
+
+/* ================= MENU ITEMS ================= */
+
+.menu-entry {
+  margin-bottom: 25px;
+}
+
+.menu-entry[style*="opacity: 0.4"] {
+  opacity: 0.75 !important;
+  filter: grayscale(60%);
+}
+
+.entry-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.name-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.entry-name {
+  font-weight: 700;
+  color: #1a1a1a;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.entry-name:hover {
+  color: #b5531f;
+  letter-spacing: -0.015em;
+}
+
+/* ================= TAGS ================= */
+
+.entry-tags {
+  display: flex;
+  gap: 8px;
+}
+
+.tag-in {
+  font-size: 8px;
+  color: #1b5e20;
+  background: #e8f5e9;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: bold;
+}
+
+.tag-out {
+  font-size: 8px;
+  color: #b71c1c;
+  background: #ffebee;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: bold;
+}
+
+.tag-promo {
+  font-size: 8px;
+  color: #ffffff;
+  background: #d86b32;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: bold;
+}
+
+/* ================= PRICES ================= */
+
+.entry-price {
+  text-align: right;
+}
+
+.price-strike {
+  color: #8d8d8d;
+  font-size: 0.85rem;
+  text-decoration: line-through;
+}
+
+.price-final {
+  color: #b14e1c;
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.price-final:hover {
+  color: #d86b32;
+}
+
+/* ================= DIVIDER ================= */
+
+.entry-line {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(216, 107, 50, 0.35),
+    transparent
+  );
+  margin-top: 10px;
+}
+
+/* ================= FOOTER ================= */
+
+.paper-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #6b4b3a;
+  opacity: 0.6;
+  margin-top: 40px;
+  letter-spacing: 0.125em;
+  line-height: 1.6;
+  transition: opacity 0.3s ease;
+}
+
+.paper-footer:hover {
+  opacity: 0.8;
+}
+
+/* ================= PAGE CURL ================= */
+
+.curl-shadow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.4),
+    transparent
+  );
+  opacity: 0;
+  pointer-events: none;
+}
