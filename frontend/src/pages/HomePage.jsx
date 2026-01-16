@@ -67,7 +67,7 @@ const HomePage = () => {
   }, []);
 
   /* ================= GSAP SCROLL (MOBILE SAFE) ================= */
-  useEffect(() => {
+  {/*useEffect(() => {
     const sections = gsap.utils.toArray('.page [data-scroll-section]');
 
     sections.forEach((section, index) => {
@@ -92,14 +92,53 @@ const HomePage = () => {
     });
 
     return () => ScrollTrigger.getAll().forEach(t => t.kill());
-  }, []);
+  }, []);*/}
+  /* ================= GSAP SCROLL (FIXED) ================= */
+useEffect(() => {
+  // Only run if not loading
+  if (loading) return;
+
+  const sections = gsap.utils.toArray('.page [data-scroll-section]');
+
+  sections.forEach((section, index) => {
+    gsap.set(section, { opacity: 0, y: 30 }); // Pre-set state to avoid flashes
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 85%', 
+      once: true,
+      invalidateOnRefresh: true, // Forces re-calc on refresh
+      onEnter: () => {
+        gsap.to(section, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          delay: index * 0.05,
+        });
+      },
+    });
+  });
+
+  return () => ScrollTrigger.getAll().forEach(t => t.kill());
+}, [loading]); // Change dependency to loading
 
   /* ================= REFRESH AFTER LOAD (CRITICAL) ================= */
-  useEffect(() => {
+  {/*useEffect(() => {
     if (!loading) {
       ScrollTrigger.refresh();
     }
-  }, [loading]);
+  }, [loading]);*/}
+  /* ================= REFRESH AFTER LOAD ================= */
+useEffect(() => {
+  if (!loading) {
+    // Wait a split second for the DOM to actually paint the images
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
+    return () => clearTimeout(timer);
+  }
+}, [loading, coffee, art]); // Refresh when main data arrays change
 
   const primaryLogo = logos[0] || null;
   const secondaryLogo = logos[1] || null;
