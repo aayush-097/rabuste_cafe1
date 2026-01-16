@@ -17,7 +17,6 @@ bot = None
 user_sessions: Dict[str, List[Dict]] = {} # Memory Store (Use Redis in Prod)
 
 # 2. Lifespan Manager
-@asynccontextmanager
 import os
 from contextlib import asynccontextmanager
 
