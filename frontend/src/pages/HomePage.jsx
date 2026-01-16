@@ -24,6 +24,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  /* ================= DATA LOAD ================= */
   useEffect(() => {
     const load = async () => {
       try {
@@ -65,45 +66,43 @@ const HomePage = () => {
     load();
   }, []);
 
-  const primaryLogo = logos[0] || null;
-  const secondaryLogo = logos[1] || null;
-
-  /* ================= GSAP SCROLL (REFINED & SMALLER) ================= */
+  /* ================= GSAP SCROLL (MOBILE SAFE) ================= */
   useEffect(() => {
     const sections = gsap.utils.toArray('.page [data-scroll-section]');
 
     sections.forEach((section, index) => {
-      gsap.set(section, {
-        opacity: 0,
-        y: 30, // ↓ smaller movement
-      });
-
       ScrollTrigger.create({
         trigger: section,
-        start: 'top 85%',
-        end: 'bottom 20%',
+        start: 'top 90%', // ✅ mobile friendly
+        once: true,       // ✅ CRITICAL
         onEnter: () => {
-          gsap.to(section, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8, // ↓ tighter animation
-            ease: 'power2.out',
-            delay: index * 0.06, // ↓ lighter stagger
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(section, {
-            opacity: 0,
-            y: 30,
-            duration: 0.45,
-            ease: 'power2.in',
-          });
+          gsap.fromTo(
+            section,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+              delay: index * 0.05,
+            }
+          );
         },
       });
     });
 
     return () => ScrollTrigger.getAll().forEach(t => t.kill());
   }, []);
+
+  /* ================= REFRESH AFTER LOAD (CRITICAL) ================= */
+  useEffect(() => {
+    if (!loading) {
+      ScrollTrigger.refresh();
+    }
+  }, [loading]);
+
+  const primaryLogo = logos[0] || null;
+  const secondaryLogo = logos[1] || null;
 
   return (
     <div className="page">
