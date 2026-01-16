@@ -2,11 +2,6 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { createOrder, getCart, addToCart, updateCart, removeFromCart, clearCart } from '../services/api';
 import '../styles/Order.css';
-
-/* ================= API CONFIG ================= */
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api';
-console.log('🔗 Order API_BASE:', API_BASE);
-
 // Category ID mapping (matching MenuViewer)
 const CATEGORY_ID_MAP = {
   "Robusta Speciality Coffee": "cat_robusta",
@@ -50,60 +45,6 @@ function getFinalPrice(item) {
     };
   }
   return { final: base, strike: null, label: null };
-}
-function normalizeMenuData(raw) {
-  const categoryMap = {};
-  const subCategoryMap = {};
-
-  // 1️⃣ Normalize categories
-  const categories = raw.categories.map(cat => {
-    const stringId =
-      CATEGORY_ID_MAP[cat.name] ||
-      cat.name.toLowerCase().replace(/\s+/g, '_');
-
-    categoryMap[String(cat._id)] = stringId;
-
-    return {
-      ...cat,
-      stringId
-    };
-  });
-
-  // 2️⃣ Normalize subcategories
-  const subCategories = raw.subCategories.map(sub => {
-    const categoryStringId = categoryMap[String(sub.categoryId)];
-    const subStringId = buildSubCategoryId(categoryStringId, sub.name);
-
-    subCategoryMap[String(sub._id)] = {
-      categoryStringId,
-      subStringId
-    };
-
-    return {
-      ...sub,
-      category: categoryStringId,   // MenuViewer-compatible
-      subStringId
-    };
-  });
-
-  // 3️⃣ Normalize items
-  const items = raw.items.map(item => {
-    const subInfo = subCategoryMap[String(item.subCategoryId)];
-    if (!subInfo) return null;
-
-    return {
-      ...item,
-      id: item._id,                       // IMPORTANT
-      categoryId: subInfo.categoryStringId,
-      subCategoryId: subInfo.subStringId
-    };
-  }).filter(Boolean);
-
-  return {
-    categories,
-    subCategories,
-    items
-  };
 }
 
 const Order = () => {
@@ -174,43 +115,65 @@ const Order = () => {
 }, [user]);
 
   // Fetch menu data
-  useEffect(() => {
-    const fetchMenuData = async () => {
-      setLoading(true);
-      setError('');
-      try {
-        const res = await fetch(`${API_BASE.replace(/\/api$/, '')}/debug/menu-full`);
-        const data = await res.json();
-        
-        console.log('✅ Order: Menu loaded -', {
-          categories: data.categories?.length,
-          items: data.items?.length
-        });
+useEffect(() => {
+  const fetchMenu = async () => {
+    try {
+      const apiBase = import.meta.env.VITE_API_BASE;
 
-        const normalized = normalizeMenuData(data);
-        setMenuData(normalized);
+      console.log("🔍 VITE_API_BASE =", apiBase);
 
-        // Set default category
-        if (data.categories?.length > 0) {
-          const firstCat =
-            data.categories.find(c => c.isActive !== false) || data.categories[0];
-
-          const categoryStringId =
-            CATEGORY_ID_MAP[firstCat.name] ||
-            firstCat.name.toLowerCase().replace(/\s+/g, '_');
-
-          setSelectedCategory(categoryStringId);
-        }
-      } catch (err) {
-        setError('Failed to load menu data');
-        console.error(err);
-      } finally {
-        setLoading(false);
+      if (!apiBase) {
+        console.error("❌ VITE_API_BASE is missing");
+        setError("Backend URL not configured");
+        return;
       }
-    };
 
-    fetchMenuData();
-  }, []);
+      // remove /api if present and hit debug endpoint
+      const backendBase = apiBase.replace(/\/api$/, '');
+      const url = `${backendBase}/debug/menu-full`;
+
+      console.log("🌍 Fetching menu from:", url);
+
+      const res = await fetch(url);
+
+      console.log("📡 Response status:", res.status);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+
+      const data = await res.json();
+
+      console.log('📥 MENU DATA FETCHED:');
+      console.log('  Categories:', data.categories?.length);
+      console.log('  SubCategories:', data.subCategories?.length);
+      console.log('  Items:', data.items?.length);
+      if (data.items?.length > 0) {
+        console.log('  First item:', data.items[0]);
+      }
+
+      setMenuData(data);
+
+      // ✅ ORIGINAL LOGIC — UNCHANGED
+      if (data.categories && data.categories.length > 0) {
+        const firstCat =
+          data.categories.find(c => c.isActive !== false) || data.categories[0];
+
+        const categoryName = firstCat.name;
+        const categoryStringId =
+          CATEGORY_ID_MAP[categoryName] ||
+          categoryName.toLowerCase().replace(/\s+/g, '_');
+
+        setSelectedCategory(categoryStringId);
+      }
+
+    } catch (err) {
+      setError('Failed to load menu. Please try again later.');
+      console.error("❌ Menu fetch failed:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchMenu();
+}, []);
 
   // Reset subcategory when category changes
   useEffect(() => {

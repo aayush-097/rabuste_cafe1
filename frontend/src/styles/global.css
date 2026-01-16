@@ -1368,3 +1368,85 @@ a:not(.cta):hover {
     padding: 2rem;
   }
 }
+/* ================= MOBILE HOME PREVIEW FIX ================= */
+
+@media (max-width: 768px) {
+
+  /* Reduce full-screen feel */
+  .home-preview-section {
+    min-height: auto;
+    padding: 3rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Content width & spacing */
+  .preview-content {
+    max-width: 100%;
+    gap: 1.25rem;
+  }
+
+  /* Titles smaller & tighter */
+  .preview-title {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Description more compact */
+  .preview-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Extra text blocks */
+  .preview-extra {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Visual container spacing */
+  .preview-visual,
+  .visual-side,
+  .visual-compact {
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+  }
+
+  /* Images smaller (IMPORTANT) */
+  .preview-visual img,
+  .visual-side img {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+  }
+
+  .visual-large img {
+    width: 220px;
+    height: 220px;
+  }
+
+  .art-images img {
+    height: 200px;
+  }
+
+  /* CTA button smaller */
+  .preview-cta {
+    padding: 0.75rem 1.4rem;
+    font-size: 0.85rem;
+    min-height: 44px;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 420px) {
+  .preview-visual img,
+  .visual-side img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .preview-title {
+    font-size: 1.5rem;
+  }
+}

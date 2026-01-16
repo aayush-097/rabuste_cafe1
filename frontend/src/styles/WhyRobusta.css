@@ -20,6 +20,7 @@
   margin-bottom: 70px;
 }
 
+
 /* LEVELS */
 
 .levels {
@@ -445,3 +446,131 @@
 .curve-left .dot:nth-child(3) { transform: translateX(0px); }
 .curve-left .dot:nth-child(4) { transform: translateX(-80px); }
 .curve-left .dot:nth-child(5) { transform: translateX(-160px); }
+/* ========================= */
+/* 📱 MOBILE RESPONSIVE FIX */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  /* Viewport */
+  .game-intro-viewport {
+    height: 100vh;
+  }
+
+  /* Moving track spacing */
+  .moving-track {
+    padding: 8vh 0;
+  }
+
+  /* WHY section */
+  #why {
+    padding: 60px 16px;
+  }
+
+  .section-title {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .section-kicker {
+    text-align: center;
+  }
+
+  /* Levels stack vertically */
+  .level,
+  .level.right {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Video sizing */
+  .level-video {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  /* Text centered */
+  .level-text {
+    text-align: center;
+  }
+
+  .level-text h3 {
+    font-size: 1.3rem;
+  }
+
+  .muted {
+    max-width: 100%;
+    font-size: 0.95rem;
+  }
+
+  /* Reduce vertical travel */
+  .levels {
+    gap: 18vh;
+    padding-bottom: 30vh;
+  }
+
+  /* Dots closer & softer */
+  .path-dots {
+    padding: 30px 0;
+    gap: 16px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Flatten curves on mobile */
+  .curve-right .dot:nth-child(1),
+  .curve-left .dot:nth-child(5) {
+    transform: translateX(-60px);
+  }
+
+  .curve-right .dot:nth-child(2),
+  .curve-left .dot:nth-child(4) {
+    transform: translateX(-30px);
+  }
+
+  .curve-right .dot:nth-child(3),
+  .curve-left .dot:nth-child(3) {
+    transform: translateX(0);
+  }
+
+  .curve-right .dot:nth-child(4),
+  .curve-left .dot:nth-child(2) {
+    transform: translateX(30px);
+  }
+
+  .curve-right .dot:nth-child(5),
+  .curve-left .dot:nth-child(1) {
+    transform: translateX(60px);
+  }
+
+  /* Gift card */
+  .gift-card {
+    margin-top: 60px;
+    padding-bottom: 120px;
+  }
+}
+/* ========================= */
+/* 📱 Smaller video blocks */
+/* ========================= */
+@media (max-width: 768px) {
+
+  .level-video {
+    width: 85%;          /* smaller than full width */
+    height: 180px;       /* reduced height */
+    margin: 0 auto;      /* keep centered */
+    border-radius: 14px; /* slightly tighter */
+  }
+
+  .level-text h3 {
+    font-size: 1.25rem;
+  }
+
+  .muted {
+    font-size: 0.9rem;
+  }
+}

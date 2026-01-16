@@ -93,3 +93,31 @@
   transform: translateY(0) scale(0.98);
   box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
+.story {
+  position: fixed;
+  inset: 0;
+  background: #f5efe8;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.question {
+  text-align: center;
+}
+
+.question h2 {
+  font-size: 2.2rem;
+  color: #3e2a1a;
+  margin-bottom: 1.6rem;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* buttons remain same as you already have */

@@ -345,3 +345,120 @@
   opacity: 0;
   pointer-events: none;
 }
+/* ================= MOBILE RESPONSIVE (APPEND ONLY) ================= */
+
+@media (max-width: 768px) {
+
+  /* ROOT */
+  .menu-viewer-root {
+    perspective: 1200px;
+    padding: 10px;
+  }
+
+  /* TOP NAV */
+  .menu-controls {
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .title-stack {
+    min-width: unset;
+  }
+
+  .page-indicator {
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+  }
+
+  .indicator-line {
+    width: 32px;
+  }
+
+  .nav-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  /* BOOK */
+  .book-container {
+    width: 92vw;
+    height: 75vh;
+    max-height: none;
+  }
+
+  /* PAPER */
+  .paper-sheet {
+    padding: 12px;
+    border-radius: 3px;
+  }
+
+  .paper-border {
+    padding: 6px;
+  }
+
+  .paper-scroll-area {
+    padding: 14px 16px;
+  }
+
+  /* SECTIONS */
+  .menu-section-group {
+    margin-bottom: 28px;
+  }
+
+  .section-bifurcation {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    margin: 22px 0 14px;
+    gap: 8px;
+  }
+
+  .section-bifurcation::before,
+  .section-bifurcation::after {
+    width: 22px;
+  }
+
+  .section-label {
+    font-size: 0.8rem;
+  }
+
+  /* ITEMS */
+  .menu-entry {
+    margin-bottom: 18px;
+  }
+
+  .entry-main {
+    gap: 12px;
+  }
+
+  .entry-name {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .entry-price {
+    min-width: 64px;
+  }
+
+  .price-final {
+    font-size: 0.95rem;
+  }
+
+  .price-strike {
+    font-size: 0.7rem;
+  }
+
+  /* TAGS */
+  .tag-promo,
+  .tag-in,
+  .tag-out {
+    font-size: 7px;
+    padding: 1px 4px;
+  }
+
+  /* FOOTER */
+  .paper-footer {
+    font-size: 0.65rem;
+    margin-top: 24px;
+  }
+}
