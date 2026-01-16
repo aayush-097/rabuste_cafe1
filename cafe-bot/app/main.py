@@ -126,5 +126,16 @@ async def clear_history(request: ChatRequest):
         user_sessions[request.session_id] = []
     return {"status": "memory_cleared"}
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for Render monitoring"""
+    return {
+        "status": "healthy",
+        "bot_loaded": bot is not None,
+        "service": "cafe-bot"
+    }
+
 if __name__ == "__main__":
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    # Get port from environment (Render sets this automatically)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=False)
