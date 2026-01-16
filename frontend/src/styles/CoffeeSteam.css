@@ -36,3 +36,16 @@ body {
 canvas {
   pointer-events: none;
 }
+@media (max-width: 768px) {
+  .background-container {
+    /* ❌ avoid mobile fixed glitches */
+    transform: translateZ(0);
+
+    /* 🎯 focus on the CUP */
+    background-position: 85% center;
+    background-size: 165%;
+
+    /* smooth */
+    will-change: background-position, background-size;
+  }
+}

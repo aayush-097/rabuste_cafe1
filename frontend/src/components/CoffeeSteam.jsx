@@ -15,7 +15,7 @@ export default function CoffeeSteam() {
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.z = isMobile ? 7.2 : 6; // ✅ visibility only
+    camera.position.z = isMobile ? 7.2 : 6; // ✅ unchanged
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -71,9 +71,17 @@ export default function CoffeeSteam() {
 
     /* ================= PARTICLES ================= */
     const COUNT = isMobile ? 180 : 140;
-    const CUP_POS = new THREE.Vector3(2, -0.5, -0.2); // ✅ NEVER CHANGE
-    const RIM_RADIUS = 0.22;
 
+    // 🔥 FIX: mobile cup alignment (desktop unchanged)
+    const CUP_POS = new THREE.Vector3(
+  isMobile ? 1: 2,   // 👈 moved left
+  isMobile ? -0.42 : -0.5,
+  -0.2
+);
+
+
+
+    const RIM_RADIUS = 0.22;
     const geometry = new THREE.PlaneGeometry(0.75, 0.75);
     const particles = [];
 
