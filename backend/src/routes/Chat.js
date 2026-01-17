@@ -14,8 +14,9 @@ const router = express.Router();
 
 
 // Define the Python Microservice URL
-// Ensure your FastAPI is running on this port
-const PYTHON_API_URL = "http://127.0.0.1:8000/chat/stream"; 
+// Use environment variable for production, fallback to localhost for development
+const CAFE_BOT_BASE_URL = process.env.CAFE_BOT_URL || "https://brewaibot-production.up.railway.app";
+const PYTHON_API_URL = `${CAFE_BOT_BASE_URL}/chat/stream`; 
 
 router.post("/", async (req, res) => {
   console.log("✅ CHAT ROUTE HIT");
