@@ -38,3 +38,16 @@
   max-width: 180px;
   opacity: 0.85;
 }
+
+/* Ensure the page is scrollable even if JS is slow */
+.page {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth mobile scroll */
+  min-height: 101vh; /* Force scrollability */
+}
+
+/* Fallback: if GSAP hasn't run yet, we don't want a blank screen */
+[data-scroll-section] {
+  will-change: transform, opacity;
+}
