@@ -1450,3 +1450,9 @@ a:not(.cta):hover {
     font-size: 1.5rem;
   }
 }
+@media (max-width: 768px) {
+  .page [data-scroll-section] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
