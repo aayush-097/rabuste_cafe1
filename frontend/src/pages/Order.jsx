@@ -303,19 +303,20 @@ const normalizeCart = (resData) => {
       return;
     }
 
-    // ✅ DEFINE res HERE
-    const res = await addToCart({
-      itemId: itemId,
-      quantity: 1
-    });
+await updateCart({ itemId, quantity: newQty });
 
-    // ✅ DEBUG LOG (now valid)
-    console.log('ADD TO CART RESPONSE:', res.data);
+// 🔥 ALWAYS reload full cart after update
+const cartRes = await getCart();
+const data = cartRes.data.data;
 
-    // ✅ Update cart properly
-    const normalized = normalizeCart(res.data);
-    console.log('Normalized cart:', normalized);
-    setCart(normalized);
+const mapped = (data.items || []).map(ci => ({
+  itemId: typeof ci.item === 'object' ? ci.item._id : ci.item,
+  name: ci.item?.name || 'Item',
+  price: ci.item?.prices?.[0]?.price || 0,
+  quantity: ci.quantity
+}));
+
+setCart(mapped);
 
   } catch (err) {
     console.error('Add to cart error:', err);
